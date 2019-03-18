@@ -10,4 +10,37 @@
         COUNT(*)
         FROM BOARD
     </select>
+
+    <select id="boardList" resultType="com.sonpen.board.domain.BoardVO">
+        SELECT
+        *
+        FROM BOARD
+    </select>
+
+    <select id="boardDetail" parameterType="int" resultType="com.sonpen.board.domain.BoardVO">
+        SELECT
+        *
+        FROM BOARD
+        WHERE
+          BNO = #{bno}
+    </select>
+
+    <insert id="boardInsert" parameterType="com.sonpen.board.domain.BoardVO">
+        INSERT INTO
+        BOARD (BNO, SUBJECT, CONTENT, WRITER, REG_DATE)
+        VALUES (#{bno}, #{subject}, #{content}, #{writer}, now())
+    </insert>
+
+    <update id="boardUpdate" parameterType="com.sonpen.board.domain.BoardVO">
+        UPDATE BOARD
+          SET
+        <if test="subject != null"> SUBJECT = #{subject} </if>
+        <if test="subject != null and content != null">, </if>
+        <if test="content != null">CONTENT = #{content}</if>
+        WHERE BNO = #{bno}
+    </update>
+
+    <delete id="boardDelete" parameterType="int">
+        DELETE FROM BOARD WHERE BNO = #{bno}
+    </delete>
 </mapper>
