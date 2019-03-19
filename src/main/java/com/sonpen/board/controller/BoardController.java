@@ -22,6 +22,7 @@ public class BoardController {
 
     @RequestMapping("/list")
     private String boardList(Model model) throws Exception {
+        System.out.println(boardService.boardListService().size());
         model.addAttribute("list", boardService.boardListService());
         return "list"; // jsp
     }
