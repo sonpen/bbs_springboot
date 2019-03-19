@@ -2,6 +2,7 @@ package com.sonpen.board.controller;
 
 import com.sonpen.board.domain.BoardVO;
 import com.sonpen.board.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class BoardController {
 
-    @Resource(name="com.sonpen.board.service.BoardService")
+    @Autowired
     BoardService boardService;
 
     @RequestMapping("/list")
@@ -36,9 +37,14 @@ public class BoardController {
         return "insert";
     }
     @RequestMapping("/insertProc")
-    private int boardInsertProd(HttpServletRequest request) throws Exception{
-        BoardVO board = (BoardVO)request.getParameterMap();
-        return boardService.boardInsertService(board);
+    private String boardInsertProc(HttpServletRequest request) throws Exception{
+        BoardVO board = new BoardVO();
+        board.setSubject(request.getParameter("subject"));
+        board.setContent(request.getParameter("content"));
+        board.setWriter(request.getParameter("writer"));
+
+        boardService.boardInsertService(board);
+        return "redirect:/list";
     }
 
     @RequestMapping("/update/{bno}") // 게시글 수정폼 호출

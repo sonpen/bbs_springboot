@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by 1109806 on 2019-03-18.
  */
-@Service("com.sonpen.board.service.BoardService")
+@Service
 public class BoardService {
     @Resource(name="com.sonpen.board.mapper.BoardMapper")
     BoardMapper boardMapper;
