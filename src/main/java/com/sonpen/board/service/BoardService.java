@@ -1,6 +1,7 @@
 package com.sonpen.board.service;
 
 import com.sonpen.board.domain.BoardVO;
+import com.sonpen.board.domain.FileVO;
 import com.sonpen.board.mapper.BoardMapper;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,9 @@ public class BoardService {
 
     public int boardDeleteService(int bno) throws Exception{
         return boardMapper.boardDelete(bno);
+    }
+
+    public int fileInsertService(FileVO fileVO) throws Exception{
+        return boardMapper.fileInsert(fileVO);
     }
 }

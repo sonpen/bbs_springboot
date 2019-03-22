@@ -25,10 +25,12 @@
           BNO = #{bno}
     </select>
 
-    <insert id="boardInsert" parameterType="com.sonpen.board.domain.BoardVO">
+    <!-- useGeneratedKeys, keyProperty: 컬럼이 auto_increment 인 경우 insert 후에 auto_increment 값을 리턴받을 경우에 설정 해줍니다. -->
+    <!-- 근데 오라클은 시퀀스를 사용하는데 이건 어떻게 할까?? -->
+    <insert id="boardInsert" parameterType="com.sonpen.board.domain.BoardVO" useGeneratedKeys="true" keyProperty="bno">
         INSERT INTO
-        BOARD (BNO, SUBJECT, CONTENT, WRITER, REG_DATE)
-        VALUES (#{bno}, #{subject}, #{content}, #{writer}, now())
+        BOARD (SUBJECT, CONTENT, WRITER, REG_DATE)
+        VALUES (#{subject}, #{content}, #{writer}, now())
     </insert>
 
     <update id="boardUpdate" parameterType="com.sonpen.board.domain.BoardVO">
@@ -43,4 +45,10 @@
     <delete id="boardDelete" parameterType="int">
         DELETE FROM BOARD WHERE BNO = #{bno}
     </delete>
+
+    <insert id="fileInsert" parameterType="com.sonpen.board.domain.FileVO" useGeneratedKeys="true" keyProperty="fno">
+        INSERT INTO
+        FILES (BNO, FILENAME, FILEORINAME, FILEURL)
+        VALUES (#{bno}, #{fileName}, #{fileOriName}, #{fileUrl})
+    </insert>
 </mapper>

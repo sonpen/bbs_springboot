@@ -1,6 +1,7 @@
 package com.sonpen.board.mapper;
 
 import com.sonpen.board.domain.BoardVO;
+import com.sonpen.board.domain.FileVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,4 +29,7 @@ public interface BoardMapper {
 
     // 게시글 삭제
     public int boardDelete(int bno) throws Exception;
+
+    // 파일저장
+    public int fileInsert(FileVO file) throws Exception;
 }
