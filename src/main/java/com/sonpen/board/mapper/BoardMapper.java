@@ -32,4 +32,7 @@ public interface BoardMapper {
 
     // 파일저장
     public int fileInsert(FileVO file) throws Exception;
+
+    // 파일상세
+    public FileVO fileDetail(int bno) throws Exception;
 }

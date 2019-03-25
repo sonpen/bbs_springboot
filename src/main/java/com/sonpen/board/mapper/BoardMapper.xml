@@ -51,4 +51,12 @@
         FILES (BNO, FILENAME, FILEORINAME, FILEURL)
         VALUES (#{bno}, #{fileName}, #{fileOriName}, #{fileUrl})
     </insert>
+
+    <select id="fileDetail" parameterType="int" resultType="com.sonpen.board.domain.FileVO">
+        SELECT
+        *
+        FROM Files
+        WHERE
+          BNO = #{bno}
+    </select>
 </mapper>
