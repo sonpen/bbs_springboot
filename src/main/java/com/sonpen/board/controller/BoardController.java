@@ -6,6 +6,7 @@ import com.sonpen.board.service.BoardService;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,9 @@ public class BoardController {
 
     @Autowired
     BoardService boardService;
+
+    @Value("${file.upload.directory}")
+    String uploadFileDir;
 
     @RequestMapping("/list")
     private String boardList(Model model) throws Exception {
@@ -60,11 +64,10 @@ public class BoardController {
             String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase();
             File destinationFile;
             String destinationFileName;
-            String fileUrl = "C:\\workspace\\IdeaProjects\\bbs_springboot\\src\\main\\webapp\\WEB-INF\\uploadFiles\\";
 
             do {
                 destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension;
-                destinationFile = new File(fileUrl, destinationFileName);
+                destinationFile = new File(uploadFileDir, destinationFileName);
             } while (destinationFile.exists());
 
             destinationFile.getParentFile().mkdirs();
@@ -75,7 +78,7 @@ public class BoardController {
             fileVO.setBno(board.getBno());
             fileVO.setFileName(destinationFileName);
             fileVO.setFileOriName(sourceFileName);
-            fileVO.setFileUrl(fileUrl);
+            fileVO.setFileUrl(uploadFileDir);
 
             boardService.fileInsertService(fileVO);     // 파일 insert
         }
