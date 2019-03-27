@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
+<layoutTag:layout>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,6 +33,7 @@
         <button type="submit" class="btn btn-primary">작성</button>
     </form>
 </div>
-<%@ include file="bootstrap.jsp" %>
+
 </body>
 </html>
+</layoutTag:layout>
